@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/historyTotalPriceTextView"
+        android:layout_width="138dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/historyTotalQuantityTextView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/historyTotalQuantityTextView"
+        android:layout_width="116dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="32dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.118"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/historyDateTextView"
+        android:layout_width="117dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="12dp"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/historyTotalQuantityTextView" />
+
+    <TextView
+        android:id="@+id/historyPaymentMethodTextView"
+        android:layout_width="165dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="12dp"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/historyDateTextView"
+        app:layout_constraintTop_toBottomOf="@+id/historyTotalPriceTextView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,12 +2,13 @@ package com.example.tugas3;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
-import android.view.View;
 
 public class MenuRecyclerView extends AppCompatActivity implements MenuAdapter.OnItemClickListener {
 
@@ -28,13 +29,22 @@ public class MenuRecyclerView extends AppCompatActivity implements MenuAdapter.O
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recMenu.setLayoutManager(layoutManager);
 
-        generateMenu();
+        generateMenu();  // Add your menu items here
 
         MenuAdapter menuAdapter = new MenuAdapter(listMenu);
         menuAdapter.setOnItemClickListener(this);
         recMenu.setAdapter(menuAdapter);
 
-        updateTotalValues(); // Update the initial total values
+        Button bayarButton = findViewById(R.id.bayar);
+        bayarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Replace 0 with the appropriate position of the selected item
+                toPay();
+            }
+        });
+
+        updateTotalValues();
     }
 
     private void generateMenu() {
@@ -47,26 +57,44 @@ public class MenuRecyclerView extends AppCompatActivity implements MenuAdapter.O
         listMenu.add(new Menu("Mie Frozen", 25000, "Mie ayam kecap dengan pangsit dan baksi frozen, yang dapat di masak sendiri dengan mudah", R.drawable.mie, 0));
     }
 
-    @Override
-    public void onItemClick(int position) {
-        if (position >= 0 && position < listMenu.size()) {
-            Menu selectedItem = listMenu.get(position);
-            selectedItem.counter++;
-            updateTotalValues();
-            toPay(position);
+    public void toPay() {
+        ArrayList<Menu> selectedItems = new ArrayList<>();
+
+        for (Menu menu : listMenu) {
+            if (menu.getQuantity() > 0) {
+                selectedItems.add(menu);
+            }
+        }
+
+        if (!selectedItems.isEmpty()) {
+            Intent intent = new Intent(this, BayarActivity.class);
+
+            // Create arrays to hold the data
+            String[] foodNames = new String[selectedItems.size()];
+            int[] foodPrices = new int[selectedItems.size()];
+            int[] foodCounters = new int[selectedItems.size()];
+
+            // Fill the arrays with data from selectedItems
+            for (int i = 0; i < selectedItems.size(); i++) {
+                Menu item = selectedItems.get(i);
+                foodNames[i] = item.getName();
+                foodPrices[i] = item.getPrice();
+                foodCounters[i] = item.getQuantity();
+            }
+
+            // Put arrays as extras in the intent
+            intent.putExtra("food_names", foodNames);
+            intent.putExtra("food_prices", foodPrices);
+            intent.putExtra("food_counters", foodCounters);
+
+            startActivity(intent);
         }
     }
 
-    public void toPay(int position) {
-        Menu selectedItem = listMenu.get(position);
 
-        if (selectedItem.getQuantity() > 0) {
-            Intent intent = new Intent(this, BayarActivity.class);
-            intent.putExtra("food_name", selectedItem.getName());
-            intent.putExtra("food_price", selectedItem.getPrice());
-            intent.putExtra("food_counter", selectedItem.getQuantity());
-            startActivity(intent);
-        }
+    @Override
+    public void onItemClick(int position) {
+        // Implement the onItemClick method as needed
     }
 
     @Override
@@ -85,5 +113,10 @@ public class MenuRecyclerView extends AppCompatActivity implements MenuAdapter.O
 
         totalItemCountTextView.setText("Total Items: " + totalItemCount);
         totalPriceTextView.setText("Total Price: $" + totalPrice);
+    }
+
+    public void openHistory(View view) {
+        Intent historyIntent = new Intent(MenuRecyclerView.this, HistoryActivity.class);
+        startActivity(historyIntent);
     }
 }
