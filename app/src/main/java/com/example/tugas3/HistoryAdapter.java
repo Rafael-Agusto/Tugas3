@@ -1,6 +1,5 @@
 package com.example.tugas3;
 
-import com.example.tugas3.PurchaseHistoryItem;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,10 +32,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
         Log.d("AdapterDebug", "Binding data: " + historyItem.toString());
 
-        holder.totalCounterTextView.setText(String.valueOf(historyItem.getTotalCounter()));
-        holder.totalPriceTextView.setText(String.valueOf(historyItem.getTotalPrice()));
-        holder.paymentMethodTextView.setText(historyItem.getPaymentMethod());
-        holder.dateTextView.setText(historyItem.getDate());
+        holder.historyTotalQuantityTextView.setText(String.valueOf(historyItem.getTotalCounter()));
+        holder.historyTotalPriceTextView.setText(String.valueOf(historyItem.getTotalPrice()));
+        holder.historyPaymentMethodTextView.setText(historyItem.getPaymentMethod());
+        holder.historyDateTextView.setText(historyItem.getDate());
     }
 
     @Override
@@ -46,19 +45,19 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView totalCounterTextView;
-        TextView totalPriceTextView;
-        TextView paymentMethodTextView;
-        TextView dateTextView;
+        TextView historyTotalPriceTextView;
+        TextView historyTotalQuantityTextView;
+        TextView historyDateTextView;
+        TextView historyPaymentMethodTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             // Initialize views using itemView.findViewById()
-            totalCounterTextView = itemView.findViewById(R.id.totalCounterTextView);
-            totalPriceTextView = itemView.findViewById(R.id.totalPriceTextView);
-            paymentMethodTextView = itemView.findViewById(R.id.paymentMethodTextView);
-            dateTextView = itemView.findViewById(R.id.dateTextView);
+            historyTotalPriceTextView = itemView.findViewById(R.id.historyTotalPriceTextView);
+            historyTotalQuantityTextView = itemView.findViewById(R.id.historyTotalQuantityTextView);
+            historyDateTextView = itemView.findViewById(R.id.historyDateTextView);
+            historyPaymentMethodTextView = itemView.findViewById(R.id.historyPaymentMethodTextView);
         }
     }
 }

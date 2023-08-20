@@ -17,6 +17,15 @@ public class PurchaseHistoryItem {
         return totalCounter;
     }
 
-    // Other getter methods for other fields
-}
+    public double getTotalPrice() {
+        return totalPrice;
+    }
 
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public String getDate() {
+        return date;
+    }
+}
